@@ -1,4 +1,6 @@
 {% extends 'main.html' %}
+{% load static %}
+
 {% block content %}
 <style>
     .product-container {
@@ -82,7 +84,9 @@
     {% for product in products %}
     <div class="product-item">
         {% if product.main_photo %}
-        <img src="../../../static/images/{{product.main_photo}}" alt="Product Photo">
+        <!-- <h1>{{product.main_photo}}</h1> -->
+        <!-- <img src="{% static 'images/'|add:product.main_photo %}" alt="Product Photo"> -->
+        <img src="{% static 'images/'|add:product.main_photo %}" alt="Product Photo">
         {% else %}
         <p>Нету фото продукта</p>
         {% endif %}

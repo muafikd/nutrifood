@@ -1,5 +1,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% load static %}
 
 <style>
     .navbar {
@@ -159,7 +160,7 @@
 
 <nav class="navbar">
     <a href="{% url 'home' %}" class="navbar-brand">
-        <img src="../static/logo_pp.png" alt="Nutrifood" class="logo">
+        <img src="{% static 'logo_pp.png'%}" alt="Nutrifood" class="logo">
     </a>
     <div class="navbar-links">
         <a href="{% url 'home' %}" class="nav-link">ГЛАВНАЯ</a>

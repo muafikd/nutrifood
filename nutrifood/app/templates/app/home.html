@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load static %}
 
 {% block content %}
 <!-- <h1>Home</h1>
@@ -135,20 +136,20 @@
                     другой приведен реальный рацион среднего жителя Казахстана.
                 </p>
                 <div class="pyramid-image">
-                    <img src="../../../static/pyramid.png" alt="Пирамида питания">
+                    <img src="{% static 'pyramid.png'%}" alt="Пирамида питания">
                 </div>
             </div>
         </div>
         <div class="calculator-container">
             <div class="calculator-button">
                 <a href="{% url 'sugar-calc' %}">
-                <img src="../../../static/calc.png" alt="Сахарный Калькулятор">
+                <img src="{% static 'calc.png'%}" alt="Сахарный Калькулятор">
                 <button type="button">Сахарный Калькулятор</button>
                 </a>
             </div>
             <div class="calculator-button">
                 <a href="{% url 'imt-calc' %}">
-                <img src="../../../static/calc_imt.png" alt="Калькулятор ИМТ">
+                <img src="{% static 'calc_imt.png'%}" alt="Калькулятор ИМТ">
                 <button type="button">Калькулятор ИМТ</button>
                 </a>
             </div>
