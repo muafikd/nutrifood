@@ -1,0 +1,114 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .container {
+        max-width: 800px;
+        margin: auto;
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .slider-container {
+        max-width: 500px;
+        margin: 20px auto;
+        position: relative;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .slider img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #ccc;
+        border: none;
+        color: black;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .prev:hover, .next:hover {
+        background-color: #bbb;
+    }
+
+    .prev {
+        left: 10px;
+    }
+
+    .next {
+        right: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+    }
+
+    p {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.5;
+        text-align: justify;
+    }
+
+    .description {
+        margin-top: 20px;
+    }
+
+    .no-images {
+        text-align: center;
+        color: #666;
+        font-size: 16px;
+    }
+</style>
+
+<div class="container">
+    <h1>{{ product.name }}</h1>
+    {% if product_photos %}
+    <div class="slider-container">
+        <div class="slider">
+            {% for photo in product_photos %}
+            <img src="{{ photo.photo.url }}" alt="Product Photo">
+            {% endfor %}
+        </div>
+        <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1)">&#10095;</button>
+    </div>
+    {% else %}
+    <p class="no-images">No available images.</p>
+    {% endif %}
+    <p class="description">{{ product.description }}</p>
+</div>
+
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("slider")[0].getElementsByTagName("img");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        slides[slideIndex-1].style.display = "block";  
+    }
+</script>
+{% endblock content %}

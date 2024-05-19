@@ -1,0 +1,105 @@
+/* Add this CSS to your stylesheet
+
+.create-room {
+    padding: 20px;
+}
+
+.layout__box {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.layout__boxHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.layout__boxTitle {
+    display: flex;
+    align-items: center;
+}
+
+.back-link {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+.arrow-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+h3 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form__group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.existing-photos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photo-item {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.photo-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.photo-item input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn--dark {
+    background-color: #333;
+    color: #fff;
+}
+
+.btn--main {
+    background-color: #007bff;
+    color: #fff;
+} */

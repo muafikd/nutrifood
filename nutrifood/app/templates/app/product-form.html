@@ -1,0 +1,148 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    .create-room .container {
+        max-width: 800px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .create-room .layout__boxHeader {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .create-room .layout__boxTitle h3 {
+        margin-left: 10px;
+    }
+
+    .create-room .form {
+        display: grid;
+        grid-gap: 20px;
+    }
+
+    .create-room .form__group {
+        margin-bottom: 20px;
+    }
+
+    .create-room .form__group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .create-room input[type='text'],
+    .create-room textarea,
+    .create-room select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: none;
+    }
+
+    .create-room .existing-photos {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .create-room .photo-item {
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    .create-room .photo-item img {
+        width: 100px;
+        height: 100px;
+        border-radius: 4px;
+    }
+
+    .create-room .btn--dark {
+        background-color: #555;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+        display: inline-block;
+    }
+
+    .create-room .btn--main {
+        background-color: green;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .create-room .btn--main:hover {
+        background-color: darkgreen;
+    }
+</style>
+{% if not request.user.is_superuser %}
+<p>You do not have permission to access this page.</p>
+{% else %}
+<main class="create-room layout">
+    <div class="container">
+        <div class="layout__box">
+            <div class="layout__boxHeader">
+                <div class="layout__boxTitle">
+                    <a href="{% url 'products' %}">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                            viewBox="0 0 32 32">
+                            <title>arrow-left</title>
+                            <path
+                                d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+                            </path>
+                        </svg>
+                    </a>
+                    <h3>Создать/Обновить продукт</h3>
+                </div>
+            </div>
+            <div class="layout__body">
+                <form class="form" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form__group">
+                        <label for="id_name">Имя продукта</label>
+                        {{ form.name }}
+                    </div>
+
+                    <div class="form__group">
+                        <label for="id_description">Описание продукта</label>
+                        {{ form.description }}
+                    </div>
+
+                    <div class="form__group">
+                        <label>Существующие</label>
+                        <div class="existing-photos">
+                            {% for photo in product.productphoto_set.all %}
+                            <div class="photo-item">
+                                <img src="{{ photo.photo.url }}" alt="Product Photo">
+                                <input type="checkbox" name="photo_{{ photo.id }}" id="photo_{{ photo.id }}">
+                                <label for="photo_{{ photo.id }}">Удалить</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="form__group">
+                        <label for="id_photos">Фото продукта</label>
+                        {{ form.photos }}
+                    </div>
+                    <div class="form__action">
+                        <a class="btn btn--dark" href="{% url 'home' %}">Отмена</a>
+                        <button class="btn btn--main" type="submit">Принять</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrifood</title>
+    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/form.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/reg.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .content-container {
+            background-color: white;
+            /* Белый фон для контента */
+            width: 80%;
+            /* Занимает 80% ширины экрана */
+            max-width: 1200px;
+            /* Максимальная ширина контейнера */
+            margin: 20px auto;
+            /* Центрирование и вертикальные отступы */
+            padding: 20px;
+            /* Внутренние отступы */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Слабая тень вокруг контейнера */
+            box-sizing: border-box;
+            /* Включает padding в ширину и высоту */
+        }
+
+        .messages {
+            padding: 10px 20px;
+            /* Отступы внутри списка сообщений */
+            margin: 10px 0;
+            /* Отступы вокруг списка сообщений */
+            list-style-type: none;
+            /* Убрать стандартные маркеры списка */
+            background-color: #f8d7da;
+            /* Фоновый цвет для списка */
+            border-radius: 5px;
+            /* Скругление углов */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Тень вокруг списка */
+        }
+
+        .messages li {
+            /* color: #721c24; */
+            /* Цвет текста сообщений */
+            margin-bottom: 8px;
+            /* Отступ между элементами списка */
+            padding: 10px;
+            /* Внутренний отступ для каждого сообщения */
+            border: 1px solid #f5c6cb;
+            /* Рамка вокруг каждого сообщения */
+            background-color: #f8d7da;
+            /* Фоновый цвет для сообщения */
+            border-radius: 4px;
+            /* Скругление углов сообщений */
+        }
+
+        /* .messages li.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .messages li.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .messages li.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .messages li.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        } */
+
+        @media (max-width: 768px) {
+            .content-container {
+                width: 95%;
+                /* Более широкий контейнер на мобильных */
+                margin: 10px auto;
+                /* Меньше вертикального пространства */
+                padding: 10px;
+                /* Меньшие внутренние отступы */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="content-container">
+        {% block content %}
+        {% endblock content %}
+    </div>
+    {% include 'footer.html' %}
+</body>
+
+</html>

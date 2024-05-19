@@ -1,0 +1,215 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    .nutrition-container,
+    .bmi-calculator {
+        max-width: 600px;
+        margin: auto;
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="number"],
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    .gender-options {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: darkgreen;
+    }
+
+    .result-section {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #e7f9e7;
+        color: #333;
+        border: 1px solid #b4dcb5;
+        border-radius: 5px;
+    }
+
+    .sugar-info,
+    .bmi-info {
+        background: #f3f3f3;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .sugar-info h2,
+    .bmi-info h2 {
+        color: #333;
+    }
+
+    .sugar-info p,
+    .bmi-info p {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.5;
+    }
+
+    .sugar-info ul,
+    .bmi-info ul {
+        margin-top: 10px;
+    }
+
+    .sugar-info li,
+    .bmi-info li {
+        margin-bottom: 5px;
+    }
+</style>
+{% if calc == 'sugar' %}
+<div class="nutrition-container">
+    <div class="nutrition-text">
+        <form id="sugarForm" method="post" action="">
+            {% csrf_token %}
+            <h1>Калькулятор сахара</h1>
+            <div class="form-group">
+                <label for="age">Возраст:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label>Пол:</label>
+                <div class="gender-options">
+                    <input type="radio" id="male" name="gender" value="male" required>
+                    <label for="male">Мужской</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Женский</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="height">Рост (в сантиметрах):</label>
+                <input type="number" id="height" name="height" required>
+            </div>
+            <div class="form-group">
+                <label for="weight">Вес (в килограммах):</label>
+                <input type="number" id="weight" name="weight" required>
+            </div>
+            <div class="form-group">
+                <label for="activity">Уровень активности:</label>
+                <select id="activity" name="activity">
+                    <option value="low">Низкая</option>
+                    <option value="medium" selected>Средняя</option>
+                    <option value="high">Высокая</option>
+                </select>
+            </div>
+            <button type="submit">Рассчитать</button>
+            {% if result %}
+            <div id="result" class="result-section">{{result}}</div>
+            {% endif %}
+        </form>
+
+    </div>
+</div>
+<div class="sugar-info">
+    <h2>Как рассчитывается рекомендуемое потребление сахара?</h2>
+    <p>Рекомендации по потреблению сахара основаны на научных исследованиях и рекомендациях Всемирной
+        организации здравоохранения (ВОЗ). ВОЗ советует ограничивать потребление свободных сахаров до менее чем
+        10% от общего суточного энергетического потребления. Для дополнительных преимуществ для здоровья
+        рекомендуется снизить это значение до 5%.</p>
+    <p>Проценты отражают долю калорий из общего количества, которые можно употреблять в виде сахара. Например,
+        при суточной норме в 2000 ккал, 10% составляют 200 ккал, которые при пересчете в граммы сахара
+        (учитывая, что в одном грамме сахара содержится примерно 4 ккал) равны 50 граммам сахара.</p>
+    <p>Такой подход помогает поддерживать здоровый вес, снижает риск развития хронических заболеваний, таких как
+        диабет второго типа, сердечно-сосудистые заболевания и другие проблемы, связанные с избыточным
+        потреблением сахара.</p>
+    <p>
+
+    </p>
+</div>
+<div class="sugar-info">
+    <h2>Как рассчитывается ваша потребность в калориях?</h2>
+    <p>Для оценки суточного калорийного потребления на основе возраста, пола и уровня активности, мы можем использовать
+        базовые физиологические уравнения, такие как уравнения Миффлина-Сент-Жеора. Эти уравнения предоставляют оценки
+        базального метаболизма (BMR), которые затем можно скорректировать с учетом уровня активности для получения
+        общего суточного расхода энергии (TDEE).</p>
+    <h3>Уравнение Миффлина-Сент-Жеора</h3>
+    <p>Уравнение выглядит следующим образом:</p>
+    <ul>
+        <li>Для мужчин: <em>BMR = 10 × вес (кг) + 6.25 × рост (см) - 5 × возраст (годы) + 5</em></li>
+        <li>Для женщин: <em>BMR = 10 × вес (кг) + 6.25 × рост (см) - 5 × возраст (годы) - 161</em></li>
+    </ul>
+    <h3>Корректировка на уровень активности</h3>
+    <p>К BMR применяют коэффициент активности для получения TDEE:</p>
+    <ul>
+        <li>Низкая активность (мало или нет упражнений): BMR × 1.2</li>
+        <li>Немного активный (лёгкие упражнения/спорт 1-3 дня в неделю): BMR × 1.375</li>
+        <li>Умеренно активный (умеренное упражнение/спорт 3-5 дней в неделю): BMR × 1.55</li>
+        <li>Очень активный (тяжёлые упражнения/спорт 6-7 дней в неделю): BMR × 1.725</li>
+        <li>Экстра активный (очень тяжёлые упражнения, физическая работа): BMR × 1.9</li>
+    </ul>
+</div>
+
+{% else %}
+<div class="bmi-calculator">
+    <h2>Калькулятор Индекса Массы Тела (ИМТ)</h2>
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="weight">Ваш вес (в килограммах):</label>
+            <input type="number" id="weight" name="weight" required min="30" max="300">
+        </div>
+        <div class="form-group">
+            <label for="height">Ваш рост (в сантиметрах):</label>
+            <input type="number" id="height" name="height" required min="100" max="250">
+        </div>
+        <button type="submit">Рассчитать ИМТ</button>
+    </form>
+    {% if bmi_result %}
+    <div class="result-section">
+        Ваш Индекс Массы Тела: {{ bmi_result }}
+    </div>
+    {% endif %}
+</div>
+<div class="bmi-info">
+    <h2>Что такое Индекс Массы Тела (ИМТ) и зачем он нужен?</h2>
+    <img src="../../../static/imt_table.png" alt="Индекс массы тела диаграмма" style="max-width:100%; height:auto;">
+    <p>Индекс Массы Тела (ИМТ) — это числовой показатель, который используется для оценки адекватности массы тела
+        человека по отношению к его росту. Он рассчитывается по формуле: вес в килограммах, деленный на квадрат роста в
+        метрах (кг/м²).</p>
+    <p>ИМТ помогает определить, страдает ли человек недостатком веса, нормальным весом, избыточным весом или ожирением,
+        что имеет важное значение для оценки рисков здоровья, связанных с весом. Вот основные категории ИМТ:</p>
+    <ul>
+        <li>Недостаточный вес: ИМТ меньше 18.5</li>
+        <li>Нормальный вес: ИМТ от 18.5 до 24.9</li>
+        <li>Избыточный вес: ИМТ от 25 до 29.9</li>
+        <li>Ожирение: ИМТ 30 или больше</li>
+    </ul>
+    <p>Понимание вашего ИМТ может помочь в планировании питания и физических упражнений для поддержания здорового образа
+        жизни.</p>
+</div>
+
+{% endif %}
+
+{% endblock %}

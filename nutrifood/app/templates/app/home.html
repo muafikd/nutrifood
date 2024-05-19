@@ -1,0 +1,163 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<!-- <h1>Home</h1>
+
+<h1>Products</h1> -->
+<style>
+    .nutrition-section {
+        background: url('../../../static/background-pattern.png') no-repeat;
+        background-size: cover;
+        padding: 20px;
+    }
+
+    .nutrition-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .nutrition-text {
+        width: 65%;
+        /* Процентное соотношение может быть адаптировано под дизайн */
+    }
+
+    .nutrition-actions {
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nutrition-section h1 {
+        color: #333;
+        font-size: 24px;
+        border-bottom: 3px solid green;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    .nutrition-section p {
+        font-size: 16px;
+        color: #666;
+    }
+
+    .nutrition-actions button {
+        background-color: green;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .nutrition-actions button:hover {
+        background-color: darkgreen;
+    }
+
+    .calculator-container {
+        display: flex;
+        flex-direction: column;
+        /* Элементы располагаются вертикально */
+        align-items: center;
+        /* Выравнивание элементов по центру */
+        gap: 20px;
+        /* Расстояние между элементами */
+    }
+
+    .calculator-button {
+        width: 150px;
+        /* Унифицированный размер для всех калькуляторов */
+        text-align: center;
+        /* Текст и изображения центрируются */
+    }
+
+    .calculator-button img {
+        width: 100%;
+        /* Изображение занимает всю ширину контейнера */
+        height: auto;
+        /* Высота автоматически подстраивается */
+    }
+
+    .calculator-button button {
+        background-color: green;
+        color: white;
+        border: none;
+        width: 100%;
+        /* Кнопка занимает всю ширину контейнера */
+        padding: 10px 0;
+        margin-top: 10px;
+        /* Отступ сверху для кнопки */
+    }
+
+    .calculator-button button:hover {
+        background-color: darkgreen;
+    }
+
+    .pyramid-image {
+        text-align: center;
+        /* Центрируем изображение */
+        margin: 20px 0;
+        /* Добавляем отступы для визуального разделения содержимого */
+    }
+
+    .pyramid-image img {
+        width: 100%;
+        /* Задаем ширину изображения */
+        max-width: 400px;
+        /* Ограничиваем максимальную ширину, чтобы изображение не было слишком большим */
+        height: auto;
+        /* Автоматическая высота для сохранения пропорций */
+    }
+</style>
+<section class="nutrition-section">
+    <div class="nutrition-container">
+        <div class="nutrition-text">
+            <h1>Как правильно питаться</h1>
+            <p>
+                Правильное, здоровое питание не означает скучное меню и отказ от вкусных блюд.
+                Как раз наоборот! Оно подразумевает сбалансированность, которой можно добиться, если есть разные
+                продукты и столько, сколько этого требует организм.
+                Так он сможет получать необходимые питательные вещества, чтобы мы могли быть здоровыми и деятельными.
+                Потому-то никакая еда не является здоровой или нездоровой, полезной или вредной сама по себе.
+                Всё зависит от размера порций и частоты приема пищи. Есть можно всё, но в правильных количествах!
+            </p>
+
+            <div class="nutrition-info">
+                <hr>
+                <p>Пирамида питания показывает, что следует есть меньше, чего больше...</p>
+                <p>
+                    И всё же, многие из нас питаются несбалансированно, не так, как рекомендуется, о чем свидетельствует
+                    проведенное в Казахстане исследование пищевого поведения. Не приходится удивляться, что люди не
+                    получают достаточного количества питательных веществ.
+                    Здесь можно сравнить между собой две пирамиды.
+                    На одной указаны рекомендуемые пропорции объемов, которые гарантируют сбалансированное питание, а на
+                    другой приведен реальный рацион среднего жителя Казахстана.
+                </p>
+                <div class="pyramid-image">
+                    <img src="../../../static/pyramid.png" alt="Пирамида питания">
+                </div>
+            </div>
+        </div>
+        <div class="calculator-container">
+            <div class="calculator-button">
+                <a href="{% url 'sugar-calc' %}">
+                <img src="../../../static/calc.png" alt="Сахарный Калькулятор">
+                <button type="button">Сахарный Калькулятор</button>
+                </a>
+            </div>
+            <div class="calculator-button">
+                <a href="{% url 'imt-calc' %}">
+                <img src="../../../static/calc_imt.png" alt="Калькулятор ИМТ">
+                <button type="button">Калькулятор ИМТ</button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+{% endblock content %}

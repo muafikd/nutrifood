@@ -1,0 +1,66 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 5px 20px;
+}
+
+.navbar-brand .logo {
+    height: 30px; /* Уменьшение размера логотипа */
+    margin-right: 50px; /* Добавление отступа справа для логотипа */
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links .nav-link {
+    color: white; /* Установка цвета текста на белый */
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar-lang .lang-link {
+    color: white;
+    margin-left: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar-lang .lang-link.active {
+    color: red; /* Активный язык будет красным */
+}
+
+.nav-link:hover, .lang-link:hover {
+    text-decoration: underline;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info .username {
+    color: white; /* Цвет текста для имени пользователя */
+    font-family: 'Arial', sans-serif;
+    margin-right: 5px; /* Отступ справа для текста пользователя */
+}
+
+.logout-link {
+    color: white; /* Цвет ссылки на выход */
+    text-decoration: none;
+    font-family: 'Arial', sans-serif;
+    background: none; /* Убрать фоновый цвет у кнопки выхода */
+    border: none; /* Убрать границу у кнопки выхода */
+    cursor: pointer;
+}
+
+.logout-link:hover {
+    text-decoration: underline;
+}

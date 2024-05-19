@@ -1,0 +1,99 @@
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    .footer {
+        background-color: #f1f1f1;
+        color: #333;
+        padding: 20px 0;
+        font-family: 'Roboto', sans-serif;
+        /* Применяем шрифт 'Roboto' для всего футера */
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-around;
+        align-items: start;
+        padding-bottom: 20px;
+    }
+
+    .footer-section {
+        margin-bottom: 20px;
+    }
+
+    .footer-logo {
+        height: 80px;
+    }
+
+    .footer h4 {
+        margin-top: 0;
+        color: #333;
+        font-weight: 700;
+        /* Roboto Bold для заголовков */
+    }
+
+    .footer ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer ul li {
+        line-height: 1.6;
+    }
+
+    .footer a {
+        color: #666;
+        text-decoration: none;
+        font-weight: 400;
+        /* Roboto Regular для ссылок */
+    }
+
+    .footer a:hover {
+        color: green;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding: 10px 20px;
+        background-color: #e9e9e9;
+        /* Светлее основного фона футера */
+        font-weight: 400;
+        /* Roboto Regular для копирайта */
+    }
+
+    @media (max-width: 768px) {
+        .footer-content {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-section {
+            text-align: center;
+        }
+    }
+</style>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <a href="{% url 'home' %}"><img src="../static/logo_pp.png" alt="Nutrifood Logo" class="footer-logo"></a>
+        </div>
+        <div class="footer-section">
+            <h4>Быстрые ссылки</h4>
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'products' %}">Продукты</a></li>
+                <li><a href="{% url 'sugar-calc' %}" class="nav-link">Калькулятор сахара</a></li>
+                <li><a href="{% url 'imt-calc' %}" class="nav-link">Калькулятор ИМТ</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Свяжитесь с нами</h4>
+            <p>Частная компания "NUTRIFOOD"</p>
+            <p>Адрес дом 3, улица Адресная город Адресный</p>
+            <p>Телефон: +7 777 777 77 77</p>
+            <p>Email: nutrifood@gmail.com</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>Copyright &copy; 2024 Nutrifood - Все права защищены</p>
+    </div>
+</footer>

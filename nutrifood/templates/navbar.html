@@ -1,0 +1,183 @@
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 5px 20px;
+        font-family: 'Roboto', sans-serif;
+        /* Применение шрифта Roboto */
+    }
+
+    .navbar-brand .logo {
+        height: 50px;
+        margin-right: 50px;
+    }
+
+    .navbar-links .nav-link {
+        color: black;
+        margin: 0 10px;
+        text-decoration: none;
+        font-weight: normal;
+        font-size: 16px;
+    }
+
+    .navbar-lang .lang-link {
+        color: black;
+        margin-left: 10px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .navbar-lang .lang-link.active {
+        color: red;
+    }
+
+    .nav-link:hover,
+    .lang-link:hover {
+        color: darkgreen;
+        text-decoration: none;
+    }
+
+    .user-info .username {
+        color: black;
+        margin-right: 5px;
+    }
+
+    .logout-link {
+        color: black;
+        text-decoration: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .logout-link:hover {
+        color: darkgreen;
+    }
+
+    /* Базовые стили */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 5px 20px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .navbar-links .nav-link,
+    .navbar-lang .lang-link,
+    .user-info .username,
+    .logout-link {
+        text-decoration: none;
+        color: black;
+        padding: 10px;
+        display: inline-block;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1
+    }
+
+    /* Медиазапросы для экранов меньше 768 пикселей */
+    @media (max-width: 768px) {
+        .navbar {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .navbar-brand .logo {
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+
+        .navbar-links,
+        .navbar-lang,
+        .user-info {
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .navbar-links .nav-link,
+        .navbar-lang .lang-link,
+        .user-info .username {
+            display: block;
+            /* Ссылки теперь отображаются каждая на новой строке */
+            margin: 5px 0;
+            /* Добавляем вертикальные отступы */
+        }
+    }
+
+    /* Опционально, более мелкие медиазапросы для очень узких экранов */
+    @media (max-width: 480px) {
+
+        .navbar-links .nav-link,
+        .navbar-lang .lang-link,
+        .user-info .username {
+            font-size: 14px;
+            /* Уменьшаем размер шрифта для мелких экранов */
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var dropdown = document.querySelector('.dropdown');
+        dropdown.addEventListener('click', function (event) {
+            var dropdownContent = this.querySelector('.dropdown-content');
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+</script>
+
+
+<nav class="navbar">
+    <a href="{% url 'home' %}" class="navbar-brand">
+        <img src="../static/logo_pp.png" alt="Nutrifood" class="logo">
+    </a>
+    <div class="navbar-links">
+        <a href="{% url 'home' %}" class="nav-link">ГЛАВНАЯ</a>
+        <a href="{% url 'products' %}" class="nav-link">ПРОДУКТЫ</a>
+        <a href="{% url 'sugar-calc' %}" class="nav-link">КАЛЬКУЛЯТОР САХАРА</a>
+        <a href="{% url 'imt-calc' %}" class="nav-link">КАЛЬКУЛЯТОР ИМТ</a>
+    </div>
+    {% if request.user.is_authenticated %}
+    <div class="user-info dropdown">
+        <span class="username">Привет, {{ request.user.name }} <span class="caret">&#9660;</span></span>
+        <div class="dropdown-content">
+            <a href="{% url 'user-profile' %}">Профиль</a>
+            <a href="{% url 'logout' %}">Выйти</a>
+        </div>
+    </div>
+    {% else %}
+    <a href="{% url 'login' %}" class="logout-link">
+        Войти
+    </a>
+    {% endif %}
+</nav>
