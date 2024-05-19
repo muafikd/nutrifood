@@ -81,6 +81,7 @@
         <div class="slider">
             {% for photo in product_photos %}
             <img src="{% static 'images/'%}{{photo.photo}}" alt="Product Photo">
+            <!-- <h1></h1> -->
             {% endfor %}
         </div>
         <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
