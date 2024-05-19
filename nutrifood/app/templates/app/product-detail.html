@@ -80,7 +80,8 @@
     <div class="slider-container">
         <div class="slider">
             {% for photo in product_photos %}
-            <img src="{{ photo.photo.url }}" alt="Product Photo">
+            <!-- {% static 'images/'|add:product.main_photo %} -->
+            <img src="{% static 'images/'|add:photo.photo.url %}" alt="Product Photo">
             {% endfor %}
         </div>
         <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
